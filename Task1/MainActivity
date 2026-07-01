@@ -1,0 +1,53 @@
+package com.example.first
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //1
+        analizList(listOf(67, -14, 22, -8, 15))
+        //2
+        passwordTest("someTestPassword")
+    }
+
+    private fun analizList(spis: List<Int>){
+        println("Минимально: ${spis.min()}")
+        println("Максимальное: ${spis.max()}")
+        println("Сумма: ${spis.sum()}")
+        println("Четных: ${spis.count{it %2 == 0}}")
+        println("Нечетных: ${spis.count{it % 2 != 0}}")
+    }
+    private fun passwordTest(password: String){
+        var cntO = 0
+        if(password.length >= 8){
+            cntO++
+        }
+        val digits = "0123456789"
+        var cnt1 = 0
+        for(i in  password){
+            for(j in digits){
+                if(i == j){
+                    cnt1++
+                }
+            }
+        }
+        if(cnt1>=1)(
+            cntO++
+        )
+        if(password.count{it.isUpperCase()} >= 1){
+            cntO++
+        }
+        if(password.count{it.isLowerCase()} >= 1) {
+            cntO++
+        }
+        if(password.count{it in "@%$#!№ ;%:?*()"} >= 1){
+            cntO++
+        }
+        if(cntO == 5){println("Надежный пароль")}
+        else if(cntO==4){println("Хороший пароль")}
+        else if(cntO==2 || cntO==3){println("Средний пароль")}
+        else{println("Ненадежный")}
+    }
+}
